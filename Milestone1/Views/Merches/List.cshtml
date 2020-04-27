@@ -1,0 +1,11 @@
+﻿
+<h4>@Model.currCategory</h4>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Merch merch in Model.allMerches)
+        {
+            @Html.Partial("AllMerches", merch)
+
+        }
+    }
+</div>
