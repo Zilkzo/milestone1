@@ -36,6 +36,7 @@ namespace Milestone1
 
             services.AddTransient<IAllMerches, MerchRepository>();
             services.AddTransient<IMerchesCategory, CategoryRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => Cart.GetCart(sp));
@@ -57,7 +58,13 @@ namespace Milestone1
 
             app.UseSession();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Merch/{action}/{category?}", defaults: new { Controller = "Merch", action = "List" });
+            });
 
             using (var scope = app.ApplicationServices.CreateScope())
             {
