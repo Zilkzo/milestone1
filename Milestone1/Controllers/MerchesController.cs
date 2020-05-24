@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Milestone1.Data;
@@ -62,6 +63,7 @@ namespace Milestone1.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Add()
         {
             return View();
@@ -69,6 +71,7 @@ namespace Milestone1.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Add(Merch merch)
         {
 
@@ -82,7 +85,7 @@ namespace Milestone1.Controllers
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public RedirectToActionResult Delete(int id)
         {
             var item = _allMerches.Merches.FirstOrDefault(i => i.id == id);

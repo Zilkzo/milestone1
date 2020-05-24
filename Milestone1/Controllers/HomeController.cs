@@ -25,5 +25,7 @@ namespace Milestone1.Controllers
             };
             return View(homeMerches);
         }
+
+
     }
 }
