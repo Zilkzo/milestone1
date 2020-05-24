@@ -5,5 +5,15 @@
         <h3>Product: @Model.name</h3>
         <p>Price: @Model.price.ToString("c")</p>
         <p>@Model.desc</p>
-        <p><a class="btn btn-warning" asp-controller="Cart" asp-action="addToCart" asp-route-id="@Model.id ">Add to cart</a></p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("admin"))
+            {
+                <p><a class="btn btn-warning" asp-controller="Merches" asp-action="Delete" asp-route-id="@Model.id ">Delete</a></p>
+            }
+        }
+        else
+        {
+            <p><a class="btn btn-warning" asp-controller="Cart" asp-action="addToCart" asp-route-id="@Model.id ">Add to cart</a></p>
+        }
     </div>

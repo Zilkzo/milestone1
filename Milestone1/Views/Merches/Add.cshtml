@@ -1,0 +1,78 @@
+﻿@model Merch
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h3>Add Merch</h3>
+<div class="row mb-5">
+
+    <form asp-action="Add" method="post" class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="name" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="desc" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="desc" class="form-control" />
+                <span asp-validation-for="desc" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="img" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="img" class="form-control" />
+                <span asp-validation-for="img" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="price" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="isFav" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="isFav" class="form-control" />
+                <span asp-validation-for="isFav" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="available" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="available" class="form-control" />
+                <span asp-validation-for="available" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="categoryID" class="control-label"></label>
+            <div class="col-12">
+                <input asp-for="categoryID" class="form-control" />
+                <span asp-validation-for="categoryID" class="has-text-danger"></span>
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+

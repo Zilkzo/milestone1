@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Milestone1.Data.Models;
 using System;
@@ -52,6 +53,16 @@ namespace Milestone1.Data
                     }
                 );
             }
+            if (!content.Role.Any())
+            {
+                content.Role.AddRange(Roles.Select(c => c.Value));
+            }
+            if (!content.User.Any())
+            {
+                content.AddRange(
+                    new User {Email = "admin@gmail.com", Password = "qwerty", RoleId = 1, Role=Roles["admin"]}
+                    );
+            }
 
             content.SaveChanges();
         }
@@ -80,5 +91,47 @@ namespace Milestone1.Data
                 return category;
             }
         }
+
+        private static Dictionary<string, Role> role;
+
+        public static Dictionary<string, Role> Roles
+        {
+            get
+            {
+                if (role == null)
+                {
+                    var list = new Role[]
+                    {
+                        new Role {Name = "admin" },
+                        new Role {Name = "user"}
+                    };
+
+                    role = new Dictionary<string, Role>();
+                    foreach (Role cat in list)
+                    {
+                        role.Add(cat.Name, cat);
+                    }
+                }
+
+                return role;
+            }
+        }
+
+        //public void OnModelCreating(AppDBContent content)
+        //{
+        //    string adminRoleName = "admin";
+        //    string userRoleName = "user";
+
+        //    string adminEmail = "admin@gmail.com";
+        //    string adminPassword = "qwerty";
+
+        //    // добавляем роли
+        //    Role adminRole = new Role { Id = 1, Name = adminRoleName };
+        //    Role userRole = new Role { Id = 2, Name = userRoleName };
+        //    User adminUser = new User { Id = 1, Email = adminEmail, Password = adminPassword, RoleId = adminRole.Id };
+
+        //    content.Role.AddRange(adminRole, userRole);
+        //    content.User.AddRange(adminUser);
+        //}
     }
 }

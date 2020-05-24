@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Milestone1.Data;
 
 namespace Milestone1.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20200524131519_auth")]
+    partial class auth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,19 +65,13 @@ namespace Milestone1.Migrations
 
                     b.Property<int>("categoryID");
 
-                    b.Property<string>("desc")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("desc");
 
-                    b.Property<string>("img")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("img");
 
                     b.Property<bool>("isFav");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("name");
 
                     b.Property<long>("price");
 
@@ -163,7 +159,7 @@ namespace Milestone1.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int?>("RoleId");
 
                     b.HasKey("Id");
 
@@ -204,8 +200,7 @@ namespace Milestone1.Migrations
                 {
                     b.HasOne("Milestone1.Data.Models.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }
